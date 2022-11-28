@@ -1,5 +1,8 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/digital-asset/daml/blob/main/LICENSE)
 
+# neil's idea
+we add leverage cap, and the idea is, the more followers you have, the more leverage we allow you to take on, because after all, if people follow you, you must know what you're doing...though we cap at 50, because we are legit
+
 # create-daml-app
 
 See [documentation] for details.

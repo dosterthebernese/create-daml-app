@@ -10,6 +10,7 @@ import UserList from './UserList';
 import PartyListEdit from './PartyListEdit';
 import LeverageEdit from './LeverageEdit';
 
+
 // USERS_BEGIN
 const MainView: React.FC = () => {
   const username = userContext.useParty();
@@ -17,7 +18,8 @@ const MainView: React.FC = () => {
   const aliases = publicContext.useStreamQueries(User.Alias, () => [], []);
   const myUser = myUserResult.contracts[0]?.payload;
   const allUsers = userContext.useStreamQueries(User.User).contracts;
-// USERS_END
+
+  // USERS_END
 
   // Sorted list of users that are following the current user
   const followers = useMemo(() =>
@@ -62,9 +64,13 @@ const MainView: React.FC = () => {
   const leverage = async (newLeverageCap: number): Promise<boolean> => {
     alert('refactor');
     alert(newLeverageCap);
+    alert(username);
     return true;
+
+//    let userAlias = await ledger.fetchByKey(User.Alias, {_1: party, _2: publicParty});
+
     // try {
-    //   await ledger.exerciseByKey(User.Alias.Leverage, [username,username], newLeverageCap);
+    //   await ledger.exerciseByKey(User.Alias.Leverage, {_1: username, _2: username}, {newLeverageCap});
     //   return true;
     // } catch (error) {
     //   alert(`Unknown error:\n${JSON.stringify(error)}`);

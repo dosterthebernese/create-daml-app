@@ -61,9 +61,10 @@ const MainView: React.FC = () => {
 
   const leverage = async (newLeverageCap: number): Promise<boolean> => {
     alert('refactor');
+    alert(newLeverageCap);
     return true;
     // try {
-    //   await ledger.exerciseByKey(User.User.Follow, username, {userToFollow});
+    //   await ledger.exerciseByKey(User.Alias.Leverage, [username,username], newLeverageCap);
     //   return true;
     // } catch (error) {
     //   alert(`Unknown error:\n${JSON.stringify(error)}`);
@@ -91,6 +92,7 @@ const MainView: React.FC = () => {
               </Header.Subheader>
             </Header.Content>
             <LeverageEdit
+                numberFollowers={followers.length}
                 parties={myUser?.following ?? []}
                 partyToAlias={partyToAlias}
                 onChangeLeverage={leverage}

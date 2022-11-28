@@ -6,6 +6,7 @@ import { Form, List, Button } from "semantic-ui-react";
 import { Party } from "@daml/types";
 
 type Props = {
+  numberFollowers: number;
   parties: Party[];
   partyToAlias: Map<Party, string>;
   onChangeLeverage: (leverageCap: number) => Promise<boolean>;
@@ -15,11 +16,12 @@ type Props = {
  * React component to edit a list of `Party`s.
  */
 const LeverageEdit: React.FC<Props> = ({
+  numberFollowers,
   parties,
   partyToAlias,
   onChangeLeverage,
 }) => {
-  const [newLeverageCap, setNewLeverageCap] = React.useState<number | undefined>(undefined);
+  const [newLeverageCap, setNewLeverageCap] = React.useState<string | undefined>(undefined);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const aliasToOption = (party: string, alias: string) => {
@@ -27,17 +29,19 @@ const LeverageEdit: React.FC<Props> = ({
   };
 
   const leverageToOption = (idx: number) => {
-    return { key: idx, text: idx, value: idx };
+    return { key: idx.toString(), text: (idx+1).toString(), value: idx.toString() };
   };
 
-  const options = Array.from(Array(20).keys()).map(e => leverageToOption(e) );
+  const options = Array.from(Array(numberFollowers).keys()).map(e => leverageToOption(e) );
 
   const changeLeverage = async (event?: React.FormEvent) => {
     if (event) {
       event.preventDefault();
     }
     setIsSubmitting(true);
-    const success = await onChangeLeverage(newLeverageCap ?? 0);
+    const nlc = parseInt(newLeverageCap ?? "0" );
+    alert(nlc);
+    const success = await onChangeLeverage(nlc ?? 0);
     setIsSubmitting(false);
     if (success) {
       setNewLeverageCap(undefined);
@@ -49,14 +53,13 @@ const LeverageEdit: React.FC<Props> = ({
         <Form.Select
           fluid
           search
-          allowAdditions
-          additionLabel="Insert a party identifier: "
-          additionPosition="bottom"
           readOnly={isSubmitting}
           loading={isSubmitting}
           className="test-select-follow-input"
           value={newLeverageCap}
           options={options}
+          onChange={(event, { value }) => setNewLeverageCap(value?.toString())}
+
         />
         <Button type="submit" className="test-select-follow-button">
           Bump It

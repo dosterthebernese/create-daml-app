@@ -33,6 +33,7 @@ const App: React.FC = () => {
     Credentials | undefined
   >();
   if (credentials) {
+    console.log('i now have credentials');
     const PublicPartyLedger: React.FC = ({ children }) => {
       const publicToken = usePublicToken();
       const publicParty = usePublicParty();

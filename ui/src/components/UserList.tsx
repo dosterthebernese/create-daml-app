@@ -30,7 +30,7 @@ const UserList: React.FC<Props> = ({users, partyToAlias, onFollow}) => {
                 className='test-select-add-user-icon'
                 onClick={() => onFollow(user.username)} />
             </List.Content>
-            <List.Header className='test-select-user-in-network'>{partyToAlias.get(user.username) ?? user.username}</List.Header>
+            <List.Header className='test-select-user-in-network'>{partyToAlias.get(user.username) ?? user.username} {user.username}</List.Header>
           </List.Content>
           <List.List>
             {[...user.following].sort((x, y) => x.localeCompare(y)).map(userToFollow =>

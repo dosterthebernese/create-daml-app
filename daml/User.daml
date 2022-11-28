@@ -27,9 +27,14 @@ template User with
     -- FOLLOW_END
 
 -- ALIAS_BEGIN
+-- we add leverage cap, and the idea is, the more followers you have, the
+-- more leverage we allow you to take on, because after all, if people follow 
+-- you, you must know what you're doing...though we cap at 50, because 
+-- we are legit
 template Alias with
     username: Party
     alias: Text
+    leverageCap: Int
     public: Party
   where
     signatory username
@@ -44,4 +49,14 @@ template Alias with
       do
         archive self
         create this with alias = newAlias
+
+    nonconsuming choice Leverage: ContractId Alias with
+        newLeverageCap: Int
+      controller username
+      do
+      do
+        assertMsg "You cannot have more than 50 x" (leverageCap > 50)
+        archive self
+        create this with leverageCap = newLeverageCap
+
 -- ALIAS_END

@@ -8,6 +8,7 @@ import { User } from '@daml.js/create-daml-app';
 import { publicContext, userContext } from './App';
 import UserList from './UserList';
 import PartyListEdit from './PartyListEdit';
+import LeverageEdit from './LeverageEdit';
 
 // USERS_BEGIN
 const MainView: React.FC = () => {
@@ -25,6 +26,8 @@ const MainView: React.FC = () => {
     .filter(user => user.username !== username)
     .sort((x, y) => x.username.localeCompare(y.username)),
     [allUsers, username]);
+
+
 
   // Map to translate party identifiers to aliases.
   const partyToAlias = useMemo(() =>
@@ -54,6 +57,23 @@ const MainView: React.FC = () => {
   }
   // FOLLOW_END
 
+  // LEVERAGE_BEGIN
+
+  const leverage = async (newLeverageCap: number): Promise<boolean> => {
+    alert('refactor');
+    return true;
+    // try {
+    //   await ledger.exerciseByKey(User.User.Follow, username, {userToFollow});
+    //   return true;
+    // } catch (error) {
+    //   alert(`Unknown error:\n${JSON.stringify(error)}`);
+    //   return false;
+    // }
+  }
+  // FOLLOW_END
+
+
+
   return (
     <Container>
       <Grid centered columns={2}>
@@ -61,9 +81,24 @@ const MainView: React.FC = () => {
           <Grid.Column>
             <Header as='h1' size='huge' color='blue' textAlign='center' style={{padding: '1ex 0em 0ex 0em'}}>
                 {myUserName ? `Welcome, ${myUserName}!` : 'Loading...'}
-                <hr/>
-                {myUserName ? `You have ${myLeverageCap}x` : 'Loading...'}
             </Header>
+            <Header.Content>
+              <Header.Subheader>
+                {myUserName ? `You have ${myLeverageCap}x` : 'Loading...'}
+              </Header.Subheader>
+              <Header.Subheader>
+                {myUserName ? `With ${followers.length} followers, you can bump up leverage.  Just do it!` : 'Loading...'}
+              </Header.Subheader>
+            </Header.Content>
+            <LeverageEdit
+                parties={myUser?.following ?? []}
+                partyToAlias={partyToAlias}
+                onChangeLeverage={leverage}
+              />
+
+
+
+
 
             <Segment>
               <Header as='h2'>

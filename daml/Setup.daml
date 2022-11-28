@@ -33,10 +33,10 @@ setup = do
   -- In the getting started guide, we only have one participant so we set the participant name to None.
   -- If you are running this against a ledger with multiple participants, specify the participant the parties
   -- should be hosted on.
-  alice <- createTestUser $ TestUser "Alice" 10 public defaultParticipant
-  bob <- createTestUser $ TestUser "Bob" 10 public defaultParticipant
-  charlie <- createTestUser $ TestUser "Charlie" 10 public defaultParticipant
-  doster <- createTestUser $ TestUser "Doster" 10 public defaultParticipant
+  alice <- createTestUser $ TestUser "Alice" 1 public defaultParticipant
+  bob <- createTestUser $ TestUser "Bob" 1 public defaultParticipant
+  charlie <- createTestUser $ TestUser "Charlie" 1 public defaultParticipant
+  doster <- createTestUser $ TestUser "Doster" 1 public defaultParticipant
   pure $ Parties with
     alice
     bob
@@ -54,7 +54,7 @@ createTestUser TestUser{alias, leverageCap, public, participantName} = do
 -- | Create the public party.
 createPublic : Optional ParticipantName -> Script Party
 createPublic participantName = do
-  publicUser <- getOrCreateUser "Public" 10 None participantName
+  publicUser <- getOrCreateUser "Public" 1 None participantName
   pure $ getPrimaryParty publicUser
 
 

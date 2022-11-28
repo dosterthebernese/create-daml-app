@@ -3,6 +3,10 @@
 # neil's idea
 we add leverage cap, and the idea is, the more followers you have, the more leverage we allow you to take on, because after all, if people follow you, you must know what you're doing...though we cap at 50, because we are legit
 
+## note
+
+export NODE_OPTIONS=--openssl-legacy-provider
+
 # create-daml-app
 
 See [documentation] for details.

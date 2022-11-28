@@ -54,7 +54,6 @@ template Alias with
         newLeverageCap: Int
       controller username
       do
-      do
         assertMsg "You cannot have more than 50 x" (leverageCap > 50)
         archive self
         create this with leverageCap = newLeverageCap

@@ -29,7 +29,7 @@ const LeverageEdit: React.FC<Props> = ({
   };
 
   const leverageToOption = (idx: number) => {
-    return { key: idx.toString(), text: (idx+1).toString(), value: idx.toString() };
+    return { key: idx.toString(), text: (idx+1).toString(), value: (idx+1).toString() };
   };
 
   const options = Array.from(Array(numberFollowers).keys()).map(e => leverageToOption(e) );

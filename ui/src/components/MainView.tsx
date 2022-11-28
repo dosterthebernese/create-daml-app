@@ -83,25 +83,22 @@ const MainView: React.FC = () => {
             <Header as='h1' size='huge' color='blue' textAlign='center' style={{padding: '1ex 0em 0ex 0em'}}>
                 {myUserName ? `Welcome, ${myUserName}!` : 'Loading...'}
             </Header>
-            <Header.Content>
-              <Header.Subheader>
-                {myUserName ? `You have ${myLeverageCap}x` : 'Loading...'}
-              </Header.Subheader>
-              <Header.Subheader>
-                {myUserName ? `With ${followers.length} followers, you can bump up leverage.  Just do it!` : 'Loading...'}
-              </Header.Subheader>
-            </Header.Content>
-            <LeverageEdit
-                numberFollowers={followers.length}
-                parties={myUser?.following ?? []}
-                partyToAlias={partyToAlias}
-                onChangeLeverage={leverage}
-              />
-
-
-
-
-
+            <Container textAlign='center'>
+              {myUserName ? `You have ${myLeverageCap}x - if you want more leverage, get more followers.` : 'Loading...'}
+            </Container>
+            {followers.length > 0 && 
+              <Container>
+                <Container textAlign='center'>
+                  {myUserName && followers.length > 0 ? `With ${followers.length} followers, you can bump up leverage.  Just do it!` : 'Nobody is following you, so you have no leverage.'}
+                </Container>
+                <LeverageEdit
+                  numberFollowers={followers.length}
+                  parties={myUser?.following ?? []}
+                  partyToAlias={partyToAlias}
+                  onChangeLeverage={leverage}
+                />
+              </Container>
+            }
             <Segment>
               <Header as='h2'>
                 <Icon name='user' />

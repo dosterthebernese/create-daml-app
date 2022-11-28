@@ -50,7 +50,7 @@ const MainScreen: React.FC<Props> = ({onLogout, getPublicParty}) => {
       try {
         let userAlias = await ledger.fetchByKey(User.Alias, {_1: party, _2: publicParty});
         if (userAlias === null) {
-           await ledger.create(User.Alias, {username: party, alias: toAlias(user.userId), public: publicParty});
+           await ledger.create(User.Alias, {username: party, leverageCap: "10", alias: toAlias(user.userId), public: publicParty});
         }
       } catch(error) {
         alert(`Unknown error:\n${JSON.stringify(error)}`);

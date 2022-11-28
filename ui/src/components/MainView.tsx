@@ -31,7 +31,14 @@ const MainView: React.FC = () => {
     new Map<Party, string>(aliases.contracts.map(({payload}) => [payload.username, payload.alias])),
     [aliases]
   );
+  // Map to translate party identifiers to leverage.
+  const partyToLeverageCap = useMemo(() =>
+    new Map<Party, string>(aliases.contracts.map(({payload}) => [payload.username, payload.leverageCap])),
+    [aliases]
+  );
+
   const myUserName = aliases.loading ? 'loading ...' : partyToAlias.get(username) ?? username;
+  const myLeverageCap = aliases.loading ? 'loading ...' : partyToLeverageCap.get(username) ?? username;
 
   // FOLLOW_BEGIN
   const ledger = userContext.useLedger();
@@ -54,6 +61,8 @@ const MainView: React.FC = () => {
           <Grid.Column>
             <Header as='h1' size='huge' color='blue' textAlign='center' style={{padding: '1ex 0em 0ex 0em'}}>
                 {myUserName ? `Welcome, ${myUserName}!` : 'Loading...'}
+                <hr/>
+                {myUserName ? `You have ${myLeverageCap}x` : 'Loading...'}
             </Header>
 
             <Segment>
